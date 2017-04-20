@@ -1,0 +1,48 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_container"
+
+    tools:context="com.images.vicenteruizsalcido.gettyimages.MainFragment">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linearlayout"
+        android:layout_width="match_parent">
+
+        <EditText
+            android:text=""
+            android:id="@+id/search_edit_text"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:layout_width="fill_parent">
+        </EditText>
+        <Button
+            android:text="Search"
+            android:id="@+id/search_button"
+            android:onClick="onClickBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </Button>
+
+    </LinearLayout>
+
+    <!-- TODO: Update blank fragment layout -->
+    <GridView
+        android:id="@+id/images_gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:columnWidth="90dp"
+        android:stretchMode="columnWidth"
+        android:layout_below="@+id/linearlayout"
+        android:visibility="gone"
+        android:gravity="center"/>
+
+</RelativeLayout>
