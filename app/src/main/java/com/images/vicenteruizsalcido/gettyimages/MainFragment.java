@@ -13,8 +13,8 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.images.vicenteruizsalcido.gettyimages.response.DisplaySize;
-import com.images.vicenteruizsalcido.gettyimages.response.Example;
 import com.images.vicenteruizsalcido.gettyimages.response.Image;
+import com.images.vicenteruizsalcido.gettyimages.response.PayLoad;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.List;
 public class MainFragment extends Fragment {
 
     public interface FragmentCallback {
-        void onTaskDone(Example example);
+        void onTaskDone(PayLoad example);
     }
 
     private GridView gridView;
@@ -65,22 +65,22 @@ public class MainFragment extends Fragment {
     public void performSearch(String search) {
         new AsyncCallImage(new FragmentCallback() {
             @Override
-            public void onTaskDone(Example example) {
-                updateAdapter(example);
+            public void onTaskDone(PayLoad payLoad) {
+                updateAdapter(payLoad);
             }
         }).execute(search);
     }
 
-    public void updateAdapter(Example example) {
+    public void updateAdapter(PayLoad payLoad) {
         gridView.setVisibility(View.VISIBLE);
-        gridView.setAdapter(new ImageAdapter(getActivity(), gridView, getListImages(example)));
+        gridView.setAdapter(new ImageAdapter(getActivity(), gridView, getListImages(payLoad)));
     }
 
-    private List<String> getListImages(Example example) {
+    private List<String> getListImages(PayLoad payLoad) {
         List<String> result = new ArrayList<>();
-        if (example != null && example.getImages() != null &&
-                example.getImages().size() > 0) {
-            for (Image image : example.getImages()) {
+        if (payLoad != null && payLoad.getImages() != null &&
+                payLoad.getImages().size() > 0) {
+            for (Image image : payLoad.getImages()) {
                 for (DisplaySize displaySize : image.getDisplaySizes()) {
                     if (!displaySize.getUri().isEmpty()) {
                         result.add(displaySize.getUri());
@@ -88,7 +88,7 @@ public class MainFragment extends Fragment {
                 }
             }
         } else {
-            if (example == null) {
+            if (payLoad == null) {
                 Toast.makeText(getActivity(), "There was an error with the service",
                         Toast.LENGTH_LONG).show();
             } else {

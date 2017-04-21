@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.images.vicenteruizsalcido.gettyimages.response.Example;
+import com.images.vicenteruizsalcido.gettyimages.response.PayLoad;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -16,7 +16,7 @@ import okhttp3.Response;
 
 public class AsyncCallImage extends AsyncTask<String, Void, Void> {
     private MainFragment.FragmentCallback fragmentCallback;
-    private Example example;
+    private PayLoad payLoad;
 
     public AsyncCallImage(MainFragment.FragmentCallback fragmentCallback) {
         this.fragmentCallback = fragmentCallback;
@@ -35,7 +35,7 @@ public class AsyncCallImage extends AsyncTask<String, Void, Void> {
             Response response = client.newCall(request).execute();
             String s = response.body().string();
             Gson gson = new Gson();
-            example = gson.fromJson(s, Example.class);
+            payLoad = gson.fromJson(s, PayLoad.class);
         } catch (Exception e) {
             Log.i("", e.getMessage());
         }
@@ -45,7 +45,7 @@ public class AsyncCallImage extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         Log.i("", "onPostExecute");
-        fragmentCallback.onTaskDone(example);
+        fragmentCallback.onTaskDone(payLoad);
     }
 
     @Override
@@ -58,8 +58,8 @@ public class AsyncCallImage extends AsyncTask<String, Void, Void> {
         Log.i("", "onProgressUpdate");
     }
 
-    public Example getExample() {
-        return example;
+    public PayLoad getPayLoad() {
+        return payLoad;
     }
 
 }
