@@ -2,7 +2,6 @@ package com.images.vicenteruizsalcido.gettyimages;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
