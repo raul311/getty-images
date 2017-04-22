@@ -15,7 +15,10 @@ import java.util.List;
  * Created by vicente.ruiz.salcido on 4/1/2017.
  */
 
-public class ImageAdapter extends BaseAdapter{
+public class ImageAdapter extends BaseAdapter {
+
+    private static final int IMAGE_SIZE = 400;
+    private static final int IMAGE_PADDING = 10;
 
     private Context context;
     private GridView grid;
@@ -32,10 +35,10 @@ public class ImageAdapter extends BaseAdapter{
         ImageView imageView;
         if (convertView == null) {
             imageView = new ImageView(context);
-            imageView.setLayoutParams(new GridView.LayoutParams(
-                    grid.getWidth()/2,  grid.getHeight()/2));
+            imageView.setLayoutParams(new GridView.LayoutParams(IMAGE_SIZE, IMAGE_SIZE));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(10, 10, 10, 10);
+            imageView.setPadding(IMAGE_PADDING, IMAGE_PADDING, IMAGE_PADDING, IMAGE_PADDING);
+
         } else {
             imageView = (ImageView) convertView;
         }
