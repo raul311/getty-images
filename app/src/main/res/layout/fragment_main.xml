@@ -31,7 +31,14 @@
 
     </LinearLayout>
 
-    <!-- TODO: Update blank fragment layout -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="invisible" />
+
     <GridView
         android:id="@+id/images_gridview"
         android:layout_width="fill_parent"

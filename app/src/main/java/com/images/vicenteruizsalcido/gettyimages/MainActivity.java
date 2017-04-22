@@ -1,11 +1,13 @@
 package com.images.vicenteruizsalcido.gettyimages;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 public class MainActivity extends Activity implements MainFragment.OnFragmentInteractionListener {
 
@@ -22,9 +24,16 @@ public class MainActivity extends Activity implements MainFragment.OnFragmentInt
         fragmentTransaction.commit();
     }
 
-    public void onFragmentInteraction(Uri uri) {}
-
     public void onClickBtn(View v) {
         mainFragment.performSearch();
+    }
+
+    @Override
+    public void hideKeyboard() {
+        InputMethodManager inputManager = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }

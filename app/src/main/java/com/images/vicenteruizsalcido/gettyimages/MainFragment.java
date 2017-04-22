@@ -1,5 +1,6 @@
 package com.images.vicenteruizsalcido.gettyimages;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.images.vicenteruizsalcido.gettyimages.response.DisplaySize;
@@ -29,6 +31,7 @@ public class MainFragment extends Fragment {
     private GridView gridView;
     private EditText editText;
     private OnFragmentInteractionListener mListener;
+    private ProgressBar progressBar;
 
     public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
@@ -47,6 +50,7 @@ public class MainFragment extends Fragment {
         Button button = (Button) view.findViewById(R.id.search_button);
         gridView = (GridView) view.findViewById(R.id.images_gridview);
         editText = (EditText) view.findViewById(R.id.search_edit_text);
+        progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
 
         button.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -63,6 +67,9 @@ public class MainFragment extends Fragment {
     }
 
     public void performSearch(String search) {
+        progressBar.setVisibility(View.VISIBLE);
+        gridView.setVisibility(View.GONE);
+        hideKeyboard();
         new AsyncCallImage(new FragmentCallback() {
             @Override
             public void onTaskDone(PayLoad payLoad) {
@@ -72,6 +79,7 @@ public class MainFragment extends Fragment {
     }
 
     public void updateAdapter(PayLoad payLoad) {
+        progressBar.setVisibility(View.GONE);
         gridView.setVisibility(View.VISIBLE);
         gridView.setAdapter(new ImageAdapter(getActivity(), gridView, getListImages(payLoad)));
     }
@@ -99,9 +107,9 @@ public class MainFragment extends Fragment {
         return result;
     }
 
-    public void onButtonPressed(Uri uri) {
+    public void hideKeyboard() {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.hideKeyboard();
         }
     }
 
@@ -123,10 +131,11 @@ public class MainFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+        void hideKeyboard();
     }
 
     public void onClickBtn(View v) {
+        progressBar.setVisibility(View.VISIBLE);
         performSearch();
     }
 }
